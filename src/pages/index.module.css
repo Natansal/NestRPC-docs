@@ -1,0 +1,30 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  padding: 4rem 0 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(1200px 400px at 50% -10%, rgba(30, 58, 138, 0.18), transparent),
+              radial-gradient(900px 320px at 10% 10%, rgba(30, 64, 175, 0.14), transparent),
+              radial-gradient(900px 320px at 90% 10%, rgba(59, 130, 246, 0.14), transparent);
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 1.75rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons :global(.button) + :global(.button) {
+  margin-left: 0.5rem;
+}

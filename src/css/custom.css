@@ -1,0 +1,51 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  /* Navy blue palette */
+  --ifm-color-primary: #1e3a8a; /* navy-700 */
+  --ifm-color-primary-dark: #172554; /* navy-900 */
+  --ifm-color-primary-darker: #0b1736; /* deeper navy */
+  --ifm-color-primary-darkest: #070f24; /* near black navy */
+  --ifm-color-primary-light: #274690; /* navy-650 */
+  --ifm-color-primary-lighter: #3357a0; /* navy-600 */
+  --ifm-color-primary-lightest: #3b82f6; /* accent blue */
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(30, 58, 138, 0.12);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #3b82f6; /* accent blue for visibility */
+  --ifm-color-primary-dark: #1d4ed8;
+  --ifm-color-primary-darker: #1e40af;
+  --ifm-color-primary-darkest: #172554;
+  --ifm-color-primary-light: #60a5fa;
+  --ifm-color-primary-lighter: #93c5fd;
+  --ifm-color-primary-lightest: #bfdbfe;
+  --docusaurus-highlighted-code-line-bg: rgba(29, 78, 216, 0.18);
+}
+
+.navbar__icon-link img {
+  display: inline-block;
+  vertical-align: middle;
+  color: currentColor;
+  opacity: .9;
+}
+
+.navbar__icon-link:hover img {
+  opacity: 1;
+}
+
+/* Landing accents */
+.hero__title {
+  letter-spacing: -0.02em;
+}
+
+.hero__subtitle {
+  opacity: 0.9;
+}
