@@ -5,61 +5,36 @@ import type * as Preset from "@docusaurus/preset-classic";
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-   title: "NestJS RPC",
+   title: "@nestjs-rpc",
    tagline: "Type-safe RPC for NestJS with zero boilerplate and smart batching",
    favicon: "img/favicon.ico",
 
-   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
    future: {
-      v4: true, // Improve compatibility with the upcoming Docusaurus v4
+      v4: true,
    },
 
-   // Set the production url of your site here
    url: "https://Natansal.github.io",
-   // Set the /<baseUrl>/ pathname under which your site is served
-   // For GitHub pages deployment, it is often '/<projectName>/'
    baseUrl: "/nestjs-rpc/",
 
-   // GitHub pages deployment config.
-   // If you aren't using GitHub pages, you don't need these.
    organizationName: "Natansal",
-   projectName: "nestjs-rpc",
+   projectName: "NestRPC-docs",
 
    onBrokenLinks: "throw",
    onBrokenMarkdownLinks: "warn",
 
-   // Even if you don't use internationalization, you can use this field to set
-   // useful metadata like html lang. For example, if your site is Chinese, you
-   // may want to replace "en" with "zh-Hans".
    i18n: {
       defaultLocale: "en",
       locales: ["en"],
    },
-
    presets: [
       [
          "classic",
          {
             docs: {
                sidebarPath: "./sidebars.ts",
-               // Please change this to your repo.
-               // Remove this to remove the "edit this page" links.
-               editUrl: "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+               editUrl: "https://github.com/Natansal/NestRPC-docs.git",
             },
-            blog: {
-               showReadingTime: true,
-               feedOptions: {
-                  type: ["rss", "atom"],
-                  xslt: true,
-               },
-               // Please change this to your repo.
-               // Remove this to remove the "edit this page" links.
-               editUrl: "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
-               // Useful options to enforce blogging best practices
-               onInlineTags: "warn",
-               onInlineAuthors: "warn",
-               onUntruncatedBlogPosts: "warn",
-            },
+            blog: false,
             theme: {
                customCss: "./src/css/custom.css",
             },
@@ -80,10 +55,9 @@ const config: Config = {
    ],
 
    themeConfig: {
-      // Replace with your project's social card
       image: "img/docusaurus-social-card.jpg",
       navbar: {
-         title: "NestJS RPC",
+         title: "@nestjs-rpc",
          logo: {
             alt: "NestJS RPC Logo",
             src: "img/logo-light.svg",
@@ -91,11 +65,10 @@ const config: Config = {
          },
          items: [
             { type: "docSidebar", sidebarId: "tutorialSidebar", position: "left", label: "Docs" },
-            { type: "search", position: "right" },
             {
                type: "html",
                position: "right",
-               value: '<a class="navbar__icon-link" href="https://github.com/Natansal/NestRPC" aria-label="GitHub" target="_blank" rel="noopener"><img src="/img/github.svg" alt="GitHub" width="22" height="22"/></a>',
+               value: '<a class="navbar__icon-link" href="https://github.com/Natansal/NestRPC.git" aria-label="GitHub" target="_blank" rel="noopener"><img src="/img/github.svg" alt="GitHub" width="22" height="22"/></a>',
             },
             {
                type: "html",
@@ -109,30 +82,15 @@ const config: Config = {
          links: [
             {
                title: "Docs",
-               items: [
-                  {
-                     label: "Quick Start",
-                     to: "/docs/quick-start",
-                  },
-               ],
+               items: [{ label: "Quick Start", to: "/docs/quick-start" }],
             },
             {
                title: "Community",
-               items: [
-                  {
-                     label: "LinkedIn",
-                     href: "https://www.linkedin.com/in/natan-salmon/",
-                  },
-               ],
+               items: [{ label: "LinkedIn", href: "https://www.linkedin.com/in/natan-salmon/" }],
             },
             {
                title: "More",
-               items: [
-                  {
-                     label: "GitHub",
-                     href: "https://github.com/Natansal/NestRPC",
-                  },
-               ],
+               items: [{ label: "GitHub", href: "https://github.com/Natansal/NestRPC.git" }],
             },
          ],
          copyright: `Copyright © ${new Date().getFullYear()} NestJS RPC. Built with Docusaurus.`,
@@ -141,6 +99,7 @@ const config: Config = {
          theme: prismThemes.github,
          darkTheme: prismThemes.dracula,
       },
+      trailingSlash: true,
    } satisfies Preset.ThemeConfig,
 };
 
