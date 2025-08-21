@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.8.1">
 <title data-rh="true">Server Overview | @nestjs-rpc</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://natansal.github.io/NestRPC-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://natansal.github.io/NestRPC-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://natansal.github.io/NestRPC-docs/docs/server/overview/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Server Overview | @nestjs-rpc"><meta data-rh="true" name="description" content="Core concepts of @nestjs-rpc/server"><meta data-rh="true" property="og:description" content="Core concepts of @nestjs-rpc/server"><link data-rh="true" rel="icon" href="/NestRPC-docs/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://natansal.github.io/NestRPC-docs/docs/server/overview/"><link data-rh="true" rel="alternate" href="https://natansal.github.io/NestRPC-docs/docs/server/overview/" hreflang="en"><link data-rh="true" rel="alternate" href="https://natansal.github.io/NestRPC-docs/docs/server/overview/" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Server Overview","item":"https://natansal.github.io/NestRPC-docs/docs/server/overview"}]}</script><link rel="stylesheet" href="/NestRPC-docs/assets/css/styles.491af0e9.css">
-<script src="/NestRPC-docs/assets/js/runtime~main.14371392.js" defer="defer"></script>
+<script src="/NestRPC-docs/assets/js/runtime~main.cff61270.js" defer="defer"></script>
 <script src="/NestRPC-docs/assets/js/main.98f037a1.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -15,7 +15,7 @@
 <ul>
 <li>Decorators: <code>@Router()</code> for classes and <code>@Route()</code> for methods</li>
 <li>Param decorators: <code>createRouterParamDecorator()</code> plus built-ins <code>Req</code>, <code>Res</code>, <code>Next</code>, <code>Input</code></li>
-<li>Module: <code>NestRPCModule.forRoot({ routes, apiPrefix })</code> to mount a dynamic controller</li>
+<li>Module: <code>NestRPCModule.forRoot({ routes, apiPrefix, logger })</code> to mount a dynamic controller</li>
 <li>Types: <code>defineAppRouter</code>, <code>InferNestRpcRouterApp</code></li>
 </ul>
 <p>Execution flow:</p>
