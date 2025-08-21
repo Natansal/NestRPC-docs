@@ -13,8 +13,8 @@ const config: Config = {
       v4: true,
    },
 
-   url: "https://Natansal.github.io",
-   baseUrl: "/nestjs-rpc/",
+   url: "https://natansal.github.io",
+   baseUrl: "/NestRPC-docs/",
 
    organizationName: "Natansal",
    projectName: "NestRPC-docs",
@@ -26,6 +26,8 @@ const config: Config = {
       defaultLocale: "en",
       locales: ["en"],
    },
+   // Ensure predictable URLs on GitHub Pages
+   trailingSlash: true,
    presets: [
       [
          "classic",
@@ -68,12 +70,12 @@ const config: Config = {
             {
                type: "html",
                position: "right",
-               value: '<a class="navbar__icon-link" href="https://github.com/Natansal/NestRPC.git" aria-label="GitHub" target="_blank" rel="noopener"><img src="/img/github.png" alt="GitHub" width="22" height="22"/></a>',
+               value: '<a class="navbar__icon-link" href="https://github.com/Natansal/NestRPC.git" aria-label="GitHub" target="_blank" rel="noopener"><img src="img/github.png" alt="GitHub" width="22" height="22"/></a>',
             },
             {
                type: "html",
                position: "right",
-               value: '<a class="navbar__icon-link" href="https://www.linkedin.com/in/natan-salmon/" aria-label="LinkedIn" target="_blank" rel="noopener"><img src="/img/linkedin.png" alt="LinkedIn" width="22" height="22"/></a>',
+               value: '<a class="navbar__icon-link" href="https://www.linkedin.com/in/natan-salmon/" aria-label="LinkedIn" target="_blank" rel="noopener"><img src="img/linkedin.png" alt="LinkedIn" width="22" height="22"/></a>',
             },
          ],
       },
