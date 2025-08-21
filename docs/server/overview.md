@@ -7,7 +7,7 @@ This package provides the NestJS integration and runtime for defining and execut
 
 - Decorators: `@Router()` for classes and `@Route()` for methods
 - Param decorators: `createRouterParamDecorator()` plus built-ins `Req`, `Res`, `Next`, `Input`
-- Module: `NestRPCModule.forRoot({ routes, apiPrefix })` to mount a dynamic controller
+- Module: `NestRPCModule.forRoot({ routes, apiPrefix, logger })` to mount a dynamic controller
 - Types: `defineAppRouter`, `InferNestRpcRouterApp`
 
 Execution flow:

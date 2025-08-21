@@ -58,7 +58,7 @@ Note: The nested keys you define here are the exact paths the client will use. F
 
 ### 3) Mount the RPC controller (server)
 
-Register the module and pass the router map. Optionally customize `apiPrefix`.
+Register the module and pass the router map. Optionally customize `apiPrefix` and `logger`.
 
 ```ts
 // app.module.ts
@@ -68,7 +68,10 @@ import { appRouter } from './nest-rpc.config';
 
 @Module({
   imports: [
-    NestRPCModule.forRoot({ routes: appRouter, apiPrefix: 'api' }),
+    NestRPCModule.forRoot({
+      routes: appRouter,
+      apiPrefix: 'api',
+    }),
   ],
 })
 export class AppModule {}
