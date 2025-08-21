@@ -68,12 +68,12 @@ const config: Config = {
             {
                type: "html",
                position: "right",
-               value: '<a class="navbar__icon-link" href="https://github.com/Natansal/NestRPC.git" aria-label="GitHub" target="_blank" rel="noopener"><img src="/img/github.svg" alt="GitHub" width="22" height="22"/></a>',
+               value: '<a class="navbar__icon-link" href="https://github.com/Natansal/NestRPC.git" aria-label="GitHub" target="_blank" rel="noopener"><img src="/img/github.png" alt="GitHub" width="22" height="22"/></a>',
             },
             {
                type: "html",
                position: "right",
-               value: '<a class="navbar__icon-link" href="https://www.linkedin.com/in/natan-salmon/" aria-label="LinkedIn" target="_blank" rel="noopener"><img src="/img/linkedin.svg" alt="LinkedIn" width="22" height="22"/></a>',
+               value: '<a class="navbar__icon-link" href="https://www.linkedin.com/in/natan-salmon/" aria-label="LinkedIn" target="_blank" rel="noopener"><img src="/img/linkedin.png" alt="LinkedIn" width="22" height="22"/></a>',
             },
          ],
       },
