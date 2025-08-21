@@ -101,7 +101,6 @@ const config: Config = {
          theme: prismThemes.github,
          darkTheme: prismThemes.dracula,
       },
-      trailingSlash: true,
    } satisfies Preset.ThemeConfig,
 };
 
