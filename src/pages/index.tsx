@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import Layout from "@theme/Layout";
 import Heading from "@theme/Heading";
+import CodeBlock from "@theme/CodeBlock";
 
 import styles from "./index.module.css";
 
@@ -30,29 +30,66 @@ function Hero() {
    );
 }
 
-function Features() {
+function CodeShowcase() {
+   const serverCode = `import { Module } from '@nestjs/common';
+import { Router, Route, defineAppRouter } from '@nestjs-rpc/server';
+
+@Router()
+export class UsersRouter {
+  @Route()
+  getUser({ id }: { id: string }) {
+    return { id, name: 'Ada Lovelace' };
+  }
+}
+
+export const appRouter = defineAppRouter({
+  users: UsersRouter,
+});
+
+@Module({ providers: [UsersRouter] })
+export class AppModule {}`;
+
+   const clientCode = `import { createRpcClient } from '@nestjs-rpc/client';
+
+// Tip: export your router type from a shared package and use it here
+type RpcApp = typeof appRouter; // e.g. import type { RpcApp } from '@acme/shared'
+
+const client = createRpcClient<RpcApp>({
+  baseUrl: 'https://api.example.com',
+  apiPrefix: 'api',
+});
+
+const user = await client.users.getUser({ id: '1' });
+console.log(user.name); // "Ada Lovelace"`;
+
    return (
-      <section className="container margin-vert--md">
+      <section className="container margin-vert--lg">
          <div className="row">
-            <div className={clsx("col col--4")}>
-               <Heading as="h3">Zero Boilerplate</Heading>
-               <p>
-                  Use <code>@Router()</code> and <code>@Route()</code>. No DTOs. No manual clients.
-               </p>
+            <div className="col col--6">
+               <Heading as="h3">Server · Router</Heading>
+               <CodeBlock language="ts" title="server/app.router.ts" showLineNumbers>
+                  {serverCode}
+               </CodeBlock>
             </div>
-            <div className={clsx("col col--4")}>
-               <Heading as="h3">End-to-End Types</Heading>
-               <p>First param is the input. The client type is inferred automatically.</p>
-            </div>
-            <div className={clsx("col col--4")}>
-               <Heading as="h3">Smart Batching</Heading>
-               <p>Multiple calls are combined into a single request. Defaults included.</p>
+            <div className="col col--6">
+               <Heading as="h3">Client · Typed usage</Heading>
+               <CodeBlock language="ts" title="client/rpc.ts" showLineNumbers>
+                  {clientCode}
+               </CodeBlock>
             </div>
          </div>
       </section>
    );
 }
 
+/**
+ * 🏠 Home page component.
+ *
+ * ✨ Renders the hero section and a side‑by‑side code showcase for the
+ * server router and the typed client usage.
+ *
+ * @returns 🎯 The landing page layout.
+ */
 export default function Home(): ReactNode {
    return (
       <Layout
@@ -63,7 +100,7 @@ export default function Home(): ReactNode {
             <Hero />
          </main>
          <section>
-            <Features />
+            <CodeShowcase />
          </section>
       </Layout>
    );
