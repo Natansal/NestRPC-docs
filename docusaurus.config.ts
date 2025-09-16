@@ -34,7 +34,7 @@ const config: Config = {
          {
             docs: {
                sidebarPath: "./sidebars.ts",
-               editUrl: "https://github.com/Natansal/NestRPC-docs.git",
+               editUrl: "https://github.com/Natansal/NestRPC-docs/blob/main",
             },
             blog: false,
             theme: {

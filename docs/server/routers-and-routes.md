@@ -21,28 +21,44 @@ export class UserQueriesRouter {
 ### Register routers
 
 ```ts
-import { defineAppRouter } from '@nestjs-rpc/server';
+import { defineManifest } from '@nestjs-rpc/server';
 import { UserQueriesRouter } from './user.queries.router';
 
-export const routes = defineAppRouter({
+export const manifest = defineManifest({
   user: { queries: UserQueriesRouter },
 });
+
+export type Manifest = typeof manifest;
 ```
 
-Use the map in `NestRPCModule.forRoot({ routes })`. The dynamic controller validates that:
+Also add your router classes to the module's `controllers` array so Nest can instantiate them:
+
+```ts
+import { Module } from '@nestjs/common';
+import { UserQueriesRouter } from './user.queries.router';
+
+@Module({ controllers: [UserQueriesRouter] })
+export class AppModule {}
+```
+
+Call `nestRpcInit(manifest)` BEFORE creating your Nest app. The runtime validates that:
 - the final path segment is a router class decorated with `@Router()`
 - the method exists and is decorated with `@Route()`
 
 ### Input param rule
 
-The first parameter is reserved for the input and is injected automatically. Do not decorate it; decorating index 0 throws at runtime.
+The first parameter is reserved for the input and is injected automatically.
+
+Further reading:
+- Nest Controllers: https://docs.nestjs.com/controllers
+- Nest Providers & DI: https://docs.nestjs.com/providers
 
 ### Client pathing follows your keys
 
 The nested keys you choose define the access path on the client. For example:
 
 ```ts
-export const routes = defineAppRouter({
+export const manifest = defineManifest({
   app: AppRouter,
   user: { queries: UserQueriesRouter },
 });
@@ -51,7 +67,7 @@ export const routes = defineAppRouter({
 Client calls:
 
 ```ts
-rpc.app.batch1(123)
+rpc.app.someMethod(123)
 rpc.user.queries.getUser({ id: '1' })
 ```
 

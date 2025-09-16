@@ -1,21 +1,29 @@
 ---
 title: Execution Context
-description: Access request data and RPC input via NestRpcExecutionContext
+description: How routes execute within NestJS
 ---
 
-`NestRpcExecutionContext` wraps Nest's `ExecutionContext` and exposes:
+RPC routes run as standard NestJS controller methods after `nestRpcInit` applies decorators.
 
-- `getClass()` and `getHandler()` for the current router and method
-- `getType()` which returns `"http-rpc"`
-- `switchToHttp()` for standard Nest HTTP objects
-- `switchToHttpRpc().getInput<T>()` to access the raw input for this call
-
-Use it implicitly via param decorators or explicitly in service code:
+- The first parameter is the raw input from the client
+- Your router classes can use dependency injection like any Nest provider
+- Nest guards, interceptors, and pipes apply as usual
 
 ```ts
-import { NestRPCService } from '@nestjs-rpc/server';
+import { Router, Route } from '@nestjs-rpc/server';
+import { Injectable } from '@nestjs/common';
 
-// programmatic execution
-await rpcService.execute(UserQueriesRouter, 'getUser', ctx);
+@Injectable()
+class UsersService { /* ... */ }
+
+@Router()
+export class UserRouter {
+  constructor(private readonly users: UsersService) {}
+
+  @Route()
+  getUser({ id }: { id: string }) {
+    return this.users.find(id);
+  }
+}
 ```
 

@@ -15,13 +15,13 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   tutorialSidebar: [
     { type: 'doc', id: 'quick-start' },
+    { type: 'doc', id: 'best-practices' },
     {
       type: 'category',
       label: 'Server (nestjs-rpc/server)',
       items: [
         'server/overview',
         'server/routers-and-routes',
-        'server/custom-params',
         'server/execution-context',
         'server/nest-integration',
         'server/error-handling',
@@ -33,7 +33,6 @@ const sidebars: SidebarsConfig = {
       items: [
         'client/overview',
         'client/configuration',
-        'client/batching',
         'client/error-handling',
       ],
     },

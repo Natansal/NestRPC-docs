@@ -1,14 +1,13 @@
 ---
 title: Error Handling
-description: RpcError and server error mapping
+description: Handling HTTP and network errors in the client
 ---
 
-When the server returns an error for a call, the client throws a `RpcError` with `{ code, name, message }`.
+When the server returns an error for a call, Axios rejects the promise with an error containing the HTTP status and data.
 
 Examples of sources:
-- Non-HTTP errors → normalized to code 500
 - Nest `HttpException` → code/status and message
-- Network or invalid JSON parsing → `RpcError.fromFetchError` / `fromInvalidJson`
+- Network errors → Axios network error
 
 Handle errors per-call:
 
@@ -16,9 +15,11 @@ Handle errors per-call:
 try {
   await rpc.user.queries.getUser({ id: 'missing' });
 } catch (e) {
-  if (e instanceof RpcError) {
-    console.error(e.code, e.name, e.message);
-  }
+  // AxiosError
+  console.error(e.response?.status, e.response?.data);
 }
 ```
 
+Further reading:
+- Axios error handling: https://axios-http.com/docs/handling_errors
+- Axios interceptors: https://axios-http.com/docs/interceptors

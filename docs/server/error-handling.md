@@ -1,9 +1,9 @@
 ---
-title: Error Handling (Server)
-description: Throw NestJS HttpExceptions inside routes; batching behavior
+title: Server Error Handling
+description: How errors are surfaced to the client
 ---
 
-You can throw any NestJS `HttpException` (e.g., `BadRequestException`, `UnauthorizedException`, `NotFoundException`) directly from your `@Route()` methods. The RPC controller normalizes these to RPC error items with the proper status code and message.
+Throw inside a route method to trigger Nest's standard exception handling. The client receives the HTTP error mapped by Nest (e.g., 400/401/500) via Axios.
 
 Example:
 
@@ -23,8 +23,9 @@ export class UserMutationsRouter {
 }
 ```
 
-Batch behavior:
-- Each call in a batch is executed independently; an error in one call does not cancel the others.
-- The server returns a `BatchResponse[]` with per-call `error` or `response`.
-- On the client, the specific call that failed will throw an error, while other calls in the same batch resolve normally.
+Note: Each call executes independently; one failing call does not affect others.
+
+Further reading:
+- NestJS Exception filters: https://docs.nestjs.com/exception-filters
+- NestJS Guards: https://docs.nestjs.com/guards
 

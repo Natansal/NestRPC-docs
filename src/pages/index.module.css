@@ -28,3 +28,44 @@
 .buttons :global(.button) + :global(.button) {
   margin-left: 0.5rem;
 }
+
+.section {
+  padding: 3rem 0;
+}
+
+.sectionAlt {
+  padding: 3rem 0;
+  background: linear-gradient(180deg, rgba(59,130,246,0.06), transparent 60%);
+}
+
+.center {
+  text-align: center;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.featureCard {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-toc-border-color);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.featureIcon {
+  font-size: 1.5rem;
+}
+
+.howList {
+  max-width: 760px;
+  margin: 1rem auto 0;
+  line-height: 1.9;
+}
+
+.codeSection {
+  padding-top: 0;
+}

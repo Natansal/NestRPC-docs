@@ -1,23 +1,31 @@
 ---
 title: Client Configuration
-description: Options for createRpcClient
+description: Options for RpcClient
 ---
 
-`createRpcClient(config)` accepts:
+`new RpcClient<Manifest>(config)` accepts:
 
-- `baseUrl` (required): server origin, e.g. `http://localhost:3000`
-- `apiPrefix` (default `"/nestjs-rpc"`): controller mount path; can be `"api"`
-- `fetchOptions` (default `{}`): merged into each request
-- `batch` (default enabled): boolean or object `{ enabled, maxBatchSize, debounceMs, maxUrlSize }`
+- `baseUrl?` (string): server origin, e.g. `http://localhost:3000`
+- `apiPrefix?` (string): controller mount path. Default: `"nestjs-rpc"` (slashes trimmed)
+- `requestOptions?` (AxiosRequestConfig): merged into each request. Default: `{}`
+- `axiosInstance?` (AxiosInstance): custom Axios instance. Default: `axios`
 
 ```ts
-import { createRpcClient } from '@nestjs-rpc/client';
+import { RpcClient } from '@nestjs-rpc/client';
+import type { Manifest } from '../server/nest-rpc.config';
 
-const rpc = createRpcClient<RpcApp>({
+const client = new RpcClient<Manifest>({
   baseUrl: 'https://api.example.com',
-  apiPrefix: 'api',
-  fetchOptions: { headers: { Authorization: 'Bearer …' } },
-  batch: { enabled: true, maxBatchSize: 10, debounceMs: 25, maxUrlSize: 4096 },
+  apiPrefix: 'nestjs-rpc',
+  requestOptions: { headers: { Authorization: 'Bearer …' } },
+});
+
+// Per-call overrides
+await client.route('user').getUserById('123', {
+  requestOptions: { headers: { 'X-Trace': 'abc' } },
 });
 ```
 
+Further reading:
+- Axios config: https://axios-http.com/docs/req_config
+- Axios instance: https://axios-http.com/docs/instance
