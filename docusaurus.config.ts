@@ -36,6 +36,12 @@ const config: Config = {
                sidebarPath: "./sidebars.ts",
                editUrl: "https://github.com/Natansal/NestRPC-docs/blob/main",
             },
+            sitemap: {
+               changefreq: "weekly",
+               priority: 0.5,
+               ignorePatterns: ["/tags/**"],
+               filename: "sitemap.xml",
+            },
             blog: false,
             theme: {
                customCss: "./src/css/custom.css",
