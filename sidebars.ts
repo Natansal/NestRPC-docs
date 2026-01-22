@@ -22,6 +22,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'server/overview',
         'server/routers-and-routes',
+        'server/file-uploads',
         'server/execution-context',
         'server/nest-integration',
         'server/error-handling',
@@ -33,6 +34,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'client/overview',
         'client/configuration',
+        'client/file-uploads',
         'client/error-handling',
       ],
     },
