@@ -38,6 +38,16 @@ const sidebars: SidebarsConfig = {
         'client/error-handling',
       ],
     },
+    {
+      type: 'category',
+      label: 'React Query (nestjs-rpc/query)',
+      items: [
+        'query/overview',
+        'query/queries',
+        'query/mutations',
+        'query/advanced',
+      ],
+    },
     { type: 'doc', id: 'faq' },
   ],
 };

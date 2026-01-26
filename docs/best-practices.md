@@ -206,6 +206,91 @@ export class FilesRouter {
 }
 ```
 
+## ⚛️ React Query Best Practices
+
+### Use Factory Pattern
+
+Create reusable hooks with default options:
+
+```typescript
+// ✅ Good: Create reusable hooks
+const useUserList = createRpcQuery(rpc.user.queries.listUsers, {
+  staleTime: 30000,
+  refetchOnWindowFocus: false,
+});
+
+const useCreateUser = createRpcMutation(rpc.user.mutations.createUser, {
+  invalidate: [rpc.user.queries.listUsers],
+});
+
+// ❌ Avoid: Creating hooks inline everywhere
+function Component() {
+  const { data } = useRpcQuery(rpc.user.queries.listUsers, undefined, {
+    staleTime: 30000,
+    refetchOnWindowFocus: false,
+  });
+}
+```
+
+### Auto-Invalidate Related Queries
+
+Always invalidate related queries after mutations:
+
+```typescript
+const useCreateUser = createRpcMutation(rpc.user.mutations.createUser, {
+  invalidate: [
+    rpc.user.queries.listUsers, // ✅ Invalidate list
+    rpc.user.queries.getUserById, // ✅ Invalidate detail queries
+  ],
+});
+```
+
+### Set Appropriate Stale Times
+
+Balance freshness with performance:
+
+```typescript
+// ✅ Good: Set appropriate stale times
+const useUserList = createRpcQuery(rpc.user.queries.listUsers, {
+  staleTime: 30000, // 30 seconds - data changes infrequently
+});
+
+const useNotifications = createRpcQuery(rpc.notifications.list, {
+  staleTime: 5000, // 5 seconds - data changes frequently
+});
+```
+
+### Use Placeholder Data
+
+Provide default values for better UX:
+
+```typescript
+const useUserList = createRpcQuery(rpc.user.queries.listUsers, {
+  placeholderData: [], // ✅ Guaranteed non-undefined
+});
+
+// In component
+const { data: users = [] } = useUserList(undefined);
+// No need to check for undefined!
+```
+
+### Handle Errors Gracefully
+
+Use error callbacks and error boundaries:
+
+```typescript
+const useCreateUser = createRpcMutation(rpc.user.mutations.createUser, {
+  invalidate: [rpc.user.queries.listUsers],
+  onError: (error) => {
+    if (error.response?.status === 409) {
+      toast.error('User already exists');
+    } else {
+      toast.error('Failed to create user');
+    }
+  },
+});
+```
+
 ## 💻 Client Best Practices
 
 ### Import Type Only (Not the Object)

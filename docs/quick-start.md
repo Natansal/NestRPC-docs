@@ -165,9 +165,13 @@ export const rpc = rpcClient.routers();
 export const userRepo = rpc.user;
 ```
 
-## 🎉 Step 6: Call Methods Like Local Functions (Client)
+## 🎉 Step 6: Use RPC in Your Client
 
-Now you have full type safety and autocomplete! 🎉
+You have two options for using RPC in your client:
+
+### Option A: Direct RPC Calls
+
+Use RPC methods directly with full type safety:
 
 ```typescript
 // User operations
@@ -185,6 +189,67 @@ await rpc.user.mutations.createUser({
 // Or via router constants
 const { data: one } = await userRepo.queries.getUser({ id: '1' });
 ```
+
+### Option B: React Query Hooks (Recommended for React)
+
+For React applications, use the `@nestjs-rpc/query` package for automatic caching, background refetching, and cache invalidation:
+
+```typescript
+// Install: npm install @nestjs-rpc/query @tanstack/react-query
+
+// src/App.tsx
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { createRpcQuery, createRpcMutation } from '@nestjs-rpc/query';
+import { rpc } from './rpc-client';
+
+const queryClient = new QueryClient();
+
+// Create reusable hooks
+const useUserList = createRpcQuery(rpc.user.queries.listUsers, {
+  staleTime: 30000,
+});
+
+const useCreateUser = createRpcMutation(rpc.user.mutations.createUser, {
+  invalidate: [rpc.user.queries.listUsers], // Auto-invalidate after success!
+});
+
+function UserList() {
+  const { data: users = [], isLoading } = useUserList(undefined);
+  const createUser = useCreateUser({
+    onSuccess: () => console.log('User created!'),
+  });
+
+  return (
+    <div>
+      {isLoading ? <div>Loading...</div> : (
+        <ul>
+          {users.map(user => <li key={user.id}>{user.name}</li>)}
+        </ul>
+      )}
+      <button onClick={() => createUser.mutate({ body: { name: 'John', email: 'john@example.com' } })}>
+        Create User
+      </button>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <UserList />
+    </QueryClientProvider>
+  );
+}
+```
+
+**Benefits of React Query integration:**
+- ✅ Automatic caching and background refetching
+- ✅ Automatic cache invalidation after mutations
+- ✅ No manual loading/error state management
+- ✅ Optimistic updates support
+- ✅ Full type safety from server to hooks
+
+See the [React Query Integration](/docs/query/overview) guide for complete documentation.
 
 ## ✅ What You Get
 

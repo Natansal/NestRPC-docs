@@ -328,6 +328,102 @@ export class UserRouter {
 
 `nestRpcInit()` applies Nest decorators (`@Controller()`, `@Post()`, etc.) to your router classes. NestJS needs these decorators to be present when it discovers controllers during app creation. Calling it after `NestFactory.create()` means the decorators won't be applied in time.
 
+## ⚛️ React Query Integration
+
+### Should I use React Query or direct RPC calls?
+
+**For React applications, React Query is highly recommended** because it provides:
+- Automatic caching and background refetching
+- Automatic cache invalidation after mutations
+- Built-in loading and error states
+- Optimistic updates support
+- Better user experience
+
+Use direct RPC calls when:
+- You're not using React
+- You need fine-grained control over request timing
+- You're building a simple app without complex state management needs
+
+### How do I set up React Query with NestRPC?
+
+1. Install dependencies:
+```bash
+npm install @nestjs-rpc/query @tanstack/react-query
+```
+
+2. Wrap your app with `QueryClientProvider`:
+```typescript
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      {/* Your app */}
+    </QueryClientProvider>
+  );
+}
+```
+
+3. Use the hooks:
+```typescript
+import { createRpcQuery, createRpcMutation } from '@nestjs-rpc/query';
+
+const useUserList = createRpcQuery(rpc.user.queries.listUsers);
+const useCreateUser = createRpcMutation(rpc.user.mutations.createUser, {
+  invalidate: [rpc.user.queries.listUsers],
+});
+```
+
+See the [React Query Integration](/docs/query/overview) guide for complete documentation.
+
+### How does automatic cache invalidation work?
+
+When you specify `invalidate` in mutation options, the hook automatically invalidates all queries matching those routes after a successful mutation:
+
+```typescript
+const useCreateUser = createRpcMutation(rpc.user.mutations.createUser, {
+  invalidate: [rpc.user.queries.listUsers],
+});
+
+// After successful mutation, all queries for rpc.user.queries.listUsers are invalidated
+// This triggers a refetch if those queries are currently being used
+```
+
+### Can I use file uploads with React Query mutations?
+
+Yes! File uploads work seamlessly:
+
+```typescript
+const mutation = useRpcMutation(rpc.files.uploadFile);
+
+mutation.mutate({
+  body: { description: 'My file' },
+  file: fileInput.files[0],
+});
+```
+
+See [Mutation Hooks](/docs/query/mutations) for details.
+
+### How do I manually invalidate queries?
+
+Use `useInvalidateRpcQuery`:
+
+```typescript
+import { useInvalidateRpcQuery } from '@nestjs-rpc/query';
+
+function RefreshButton() {
+  const invalidate = useInvalidateRpcQuery();
+  
+  return (
+    <button onClick={() => invalidate(rpc.user.queries.listUsers)}>
+      Refresh
+    </button>
+  );
+}
+```
+
 ## 🐛 Troubleshooting
 
 ### Routes are not being registered

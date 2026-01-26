@@ -236,10 +236,37 @@ const client = new RpcClient<Manifest>({
 5. **Handle errors** - Wrap calls in try-catch or use error boundaries
 6. **Type your responses** - Use `const { data }` destructuring for better types
 
+## ⚛️ React Query Integration
+
+For React applications, consider using `@nestjs-rpc/query` for automatic caching, background refetching, and cache invalidation:
+
+```typescript
+import { createRpcQuery, createRpcMutation } from '@nestjs-rpc/query';
+
+// Create reusable hooks
+const useUserList = createRpcQuery(rpc.user.queries.listUsers, {
+  staleTime: 30000,
+});
+
+const useCreateUser = createRpcMutation(rpc.user.mutations.createUser, {
+  invalidate: [rpc.user.queries.listUsers], // Auto-invalidate!
+});
+
+// Use in components
+function UserList() {
+  const { data: users = [] } = useUserList(undefined);
+  const createUser = useCreateUser();
+  // ...
+}
+```
+
+See the [React Query Integration](/docs/query/overview) guide for complete documentation.
+
 ## 📚 Next Steps
 
 - Learn about [file uploads](/docs/client/file-uploads) in detail
 - Explore [configuration options](/docs/client/configuration)
 - Understand [error handling](/docs/client/error-handling) patterns
+- Check out [React Query integration](/docs/query/overview) for React apps
 - Check out [best practices](/docs/best-practices) for organizing your code
 

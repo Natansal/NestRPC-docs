@@ -21,6 +21,7 @@ NestRPC is a lightweight RPC layer for NestJS that eliminates the boilerplate of
 - ⚡ **Zero Runtime Overhead** - Runtime magic using proxies, no code generation needed
 - 🔄 **Automatic Route Registration** - Routes work via TypeScript decorators and runtime magic using proxies
 - 🎨 **Framework Agnostic Client** - Works with React, Vue, Angular, or vanilla JS
+- ⚛️ **React Query Integration** - Type-safe React Query hooks with automatic caching and cache invalidation
 
 ### The Problem It Solves
 
@@ -111,6 +112,7 @@ await rpc.user.uploadAvatar({ userId: '123' }, { file: myFile });
 |---------|-------------|-----|
 | `@nestjs-rpc/server` | NestJS server integration with decorators and runtime magic using proxies | [![npm](https://img.shields.io/npm/v/@nestjs-rpc/server.svg)](https://www.npmjs.com/package/@nestjs-rpc/server) |
 | `@nestjs-rpc/client` | Type-safe client for calling RPC methods from any frontend | [![npm](https://img.shields.io/npm/v/@nestjs-rpc/client.svg)](https://www.npmjs.com/package/@nestjs-rpc/client) |
+| `@nestjs-rpc/query` | Type-safe React Query hooks with automatic caching and cache invalidation | [![npm](https://img.shields.io/npm/v/@nestjs-rpc/query.svg)](https://www.npmjs.com/package/@nestjs-rpc/query) |
 
 ## 🚀 Quick Start
 
@@ -131,6 +133,8 @@ Or explore the [complete example](https://github.com/Natansal/NestRPC/tree/main/
 | Boilerplate | ✅ Zero | ❌ High | ✅ Low |
 | NestJS Integration | ✅ Native | ✅ Native | ⚠️ Limited |
 | Framework Agnostic Client | ✅ Yes | ✅ Yes | ⚠️ React-focused |
+| React Query Integration | ✅ Type-safe hooks | ❌ Manual setup | ✅ Type-safe hooks |
+| Automatic Cache Invalidation | ✅ Built-in | ❌ Manual | ⚠️ Manual |
 
 ---
 
